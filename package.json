@@ -1,0 +1,32 @@
+{
+  "name": "express-mysql-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/app.js",
+    "debug-start": "nodemon ./src/app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "http-status-codes": "^1.4.0",
+    "config": "^1.30.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanleand/node-express-mysql-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emanleand/node-express-mysql-boilerplate/issues"
+  },
+  "homepage": "https://github.com/emanleand/node-express-mysql-boilerplate#readme"
+}
