@@ -4,7 +4,7 @@ const createError = require('http-errors')
 
 const getOneCustomer = async (db, id) => {
   const [result] = await db.query(
-    `SELECT * FROM customerDB.customer WHERE customerId = ?`,
+    `SELECT * FROM salesSystemsDB.customer WHERE customerId = ?`,
     [id]
   );
 
@@ -24,7 +24,7 @@ const validateResult = (result) => {
 
 const getAllCustomer = async (db) => {
   const [result] = await db.query(
-    `SELECT * FROM customerDB.customer`
+    `SELECT * FROM salesSystemsDB.customer`
   );
 
   return result;

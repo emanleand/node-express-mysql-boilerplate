@@ -7,7 +7,7 @@
         "host": "localhost",
         "user": "root",
         "password": "root",
-        "database": "customerDB",
+        "database": "salesSystemsDB",
         "port": 3306
       }
     }
