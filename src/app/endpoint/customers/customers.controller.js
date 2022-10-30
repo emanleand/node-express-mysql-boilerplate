@@ -1,14 +1,41 @@
 const httpStatusCodes = require('http-status-codes');
 
-const getCustomers = async (req, res) => {
+const {
+  customersServices, 
+  customersDbContext
+} = require('../../services');
+
+const { mapOptionsContext: contextConfig } = require('../../mappers');
+
+const getCustomers = async (_, res) => {
   try {
-    return res.status(httpStatusCodes.OK).send({ message: 'all customers' });
+    const context = await customersDbContext.createContext(contextConfig.options);
+    const result = await customersServices.getAllCustomer(context);
+
+    res.status(httpStatusCodes.OK).send(result);
   } catch (error) {
 
-    return res.status(httpStatusCodes.BAD_REQUEST).send('Error verifying version!');
+    res.status(error.status).send({
+      message: error.message
+    });
   }
 };
 
+const getCustomersById = async (req, res) => {
+  try {
+    const context = await customersDbContext.createContext(contextConfig.options);
+    const result = await customersServices.getOneCustomer(context, req.params.customerId);
+
+    res.status(httpStatusCodes.OK).send(result);
+  } catch (error) {
+
+    res.status(error.status).send({
+      message: error.message
+    });
+  }
+}
+
 module.exports = {
   getCustomers,
+  getCustomersById
 };

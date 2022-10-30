@@ -1,4 +1,15 @@
 {
   "port": 3000,
-  "killTimeout": 0
+  "killTimeout": 0,
+  "services": {
+    "customer": {
+      "db": {
+        "host": "localhost",
+        "user": "root",
+        "password": "root",
+        "database": "customerDB",
+        "port": 3306
+      }
+    }
+  }
 }

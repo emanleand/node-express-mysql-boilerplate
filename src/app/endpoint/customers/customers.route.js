@@ -8,4 +8,8 @@ router
   .route('/customers')
   .get(customersController.getCustomers);
 
+router
+  .route('/customers/:customerId')
+  .get(customersController.getCustomersById);
+
 module.exports = router;
