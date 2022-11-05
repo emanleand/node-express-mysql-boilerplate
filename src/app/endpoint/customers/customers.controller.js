@@ -1,7 +1,7 @@
 const httpStatusCodes = require('http-status-codes');
 
 const {
-  customersServices, 
+  customersServices,
   customersDbContext
 } = require('../../services');
 
@@ -35,7 +35,23 @@ const getCustomersById = async (req, res) => {
   }
 }
 
+const createCustomer = async (req, res) => {
+  try {
+    const context = await customersDbContext.createContext(contextConfig.options);
+    const result = await customersServices.createOneCustomer(context, req.body);
+
+    res.status(httpStatusCodes.OK).send({ insertId: result.insertId });
+  } catch (error) {
+
+    res.status(error.status).send({
+      message: error.message
+    });
+  }
+}
+
+
 module.exports = {
   getCustomers,
-  getCustomersById
+  getCustomersById,
+  createCustomer
 };

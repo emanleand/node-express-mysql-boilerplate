@@ -30,7 +30,17 @@ const getAllCustomer = async (db) => {
   return result;
 }
 
+const createOneCustomer = async (db, body) => {
+  const [result] = await db.query(
+    `INSERT INTO salesSystemsDB.customer (firstName, lastName, email) VALUES (?, ?, ?)`,
+    [body.firstName, body.lastName, body.email]
+  );
+
+  return result;
+}
+
 module.exports = {
   getOneCustomer,
-  getAllCustomer
+  getAllCustomer,
+  createOneCustomer
 }

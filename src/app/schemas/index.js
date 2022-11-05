@@ -1,5 +1,7 @@
 const optionsContextSchema = require('./config.schema');
+const customer = require('./customer.schema');
 
 module.exports = {
-  ...optionsContextSchema
+  ...optionsContextSchema,
+  ...customer
 }
