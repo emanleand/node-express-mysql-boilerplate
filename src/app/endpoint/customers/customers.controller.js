@@ -7,48 +7,38 @@ const {
 
 const { mapOptionsContext: contextConfig } = require('../../mappers');
 
-const getCustomers = async (_, res) => {
+const getCustomers = async (_, res, next) => {
   try {
     const context = await customersDbContext.createContext(contextConfig.options);
     const result = await customersServices.getAllCustomer(context);
 
     res.status(httpStatusCodes.OK).send(result);
   } catch (error) {
-
-    res.status(error.status).send({
-      message: error.message
-    });
+    next(error);
   }
 };
 
-const getCustomersById = async (req, res) => {
+const getCustomersById = async (req, res, next) => {
   try {
     const context = await customersDbContext.createContext(contextConfig.options);
     const result = await customersServices.getOneCustomer(context, req.params.customerId);
 
     res.status(httpStatusCodes.OK).send(result);
   } catch (error) {
-
-    res.status(error.status).send({
-      message: error.message
-    });
+    next(error);
   }
-}
+};
 
-const createCustomer = async (req, res) => {
+const createCustomer = async (req, res, next) => {
   try {
     const context = await customersDbContext.createContext(contextConfig.options);
     const result = await customersServices.createOneCustomer(context, req.body);
 
     res.status(httpStatusCodes.OK).send({ insertId: result.insertId });
   } catch (error) {
-
-    res.status(error.status).send({
-      message: error.message
-    });
+    next(error);
   }
-}
-
+};
 
 module.exports = {
   getCustomers,

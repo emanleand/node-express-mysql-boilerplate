@@ -10,18 +10,14 @@ const generatedJoiSchemas = {};
  */
 
 const createSchema = (className, schema) => {
-  try {
-    Object.keys(schema).forEach((key) => {
-      if (!joi.isSchema(schema[key])) {
-        throw new Error(`Property ${key} must be an instance of Joi`);
-      }
-    });
-    const joiSchema = joi.object().keys(schema).meta({ className });
-    generatedJoiSchemas[className] = joiSchema;
-    return joiSchema;
-  } catch (error) {
-    throw error;
-  }
+  Object.keys(schema).forEach((key) => {
+    if (!joi.isSchema(schema[key])) {
+      throw new Error(`Property ${key} must be an instance of Joi`);
+    }
+  });
+  const joiSchema = joi.object().keys(schema).meta({ className });
+  generatedJoiSchemas[className] = joiSchema;
+  return joiSchema;
 };
 
 module.exports = { createSchema, generatedJoiSchemas };

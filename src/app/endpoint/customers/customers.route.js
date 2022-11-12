@@ -22,6 +22,6 @@ router
   .post(
     joiValidator.body(customerBodySchema),
     customersController.createCustomer
-  );  
+  );
 
 module.exports = router;

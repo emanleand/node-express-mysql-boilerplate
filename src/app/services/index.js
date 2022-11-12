@@ -3,5 +3,5 @@ const customersServices = require('./customers.service');
 
 module.exports = {
   customersDbContext,
-  customersServices  
-}
+  customersServices
+};

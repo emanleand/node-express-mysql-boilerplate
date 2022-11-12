@@ -1,46 +1,56 @@
-const uuid = require('uuid')
-const config = require('config')
-const createError = require('http-errors')
-
-const getOneCustomer = async (db, id) => {
-  const [result] = await db.query(
-    `SELECT * FROM salesSystemsDB.customer WHERE customerId = ?`,
-    [id]
-  );
-
-  validateResult(result);
-
-  return result[0];
-}
+const createError = require('http-errors');
 
 const validateResult = (result) => {
-
   if (!result.length) {
     throw createError.NotFound('customer not found');
   }
+};
 
-  return;
-}
+const getOneCustomer = async (db, id) => {
+  try {
+    const [result] = await db.query(
+      'SELECT * FROM salesSystemsDB.customer WHERE customerId = ?',
+      [id]
+    );
+
+    validateResult(result);
+
+    return result[0];
+  } catch (error) {
+    console.log(error);
+    throw createError.ServiceUnavailable();
+  }
+};
 
 const getAllCustomer = async (db) => {
-  const [result] = await db.query(
-    `SELECT * FROM salesSystemsDB.customer`
-  );
+  try {
+    const [result] = await db.query(
+      'SELECT * FROM salesSystemsDB.customer'
+    );
 
-  return result;
-}
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw createError.ServiceUnavailable();
+  }
+};
 
 const createOneCustomer = async (db, body) => {
-  const [result] = await db.query(
-    `INSERT INTO salesSystemsDB.customer (firstName, lastName, email) VALUES (?, ?, ?)`,
-    [body.firstName, body.lastName, body.email]
-  );
+  try {
+    const [result] = await db.query(
+      'INSERT INTO salesSystemsDB.customer (firstName, lastName, email) VALUES (?, ?, ?)',
+      [body.firstName, body.lastName, body.email]
+    );
 
-  return result;
-}
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw createError.ServiceUnavailable();
+  }
+};
 
 module.exports = {
   getOneCustomer,
   getAllCustomer,
   createOneCustomer
-}
+};
