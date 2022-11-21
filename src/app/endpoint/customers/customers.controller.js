@@ -34,7 +34,7 @@ const createCustomer = async (req, res, next) => {
     const context = await customersDbContext.createContext(contextConfig.options);
     const result = await customersServices.createOneCustomer(context, req.body);
 
-    res.status(httpStatusCodes.OK).send({ insertId: result.insertId });
+    res.status(httpStatusCodes.CREATED).send({ insertId: result.insertId });
   } catch (error) {
     next(error);
   }
